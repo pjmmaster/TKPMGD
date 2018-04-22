@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="@color/colorWhite"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/speaker"
+        android:padding="10dp"
+        android:src="@drawable/speaker_volume_loud"
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:gravity="center|left"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/en"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            android:textSize="25dp"
+            android:text="him"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/pronouce"
+            android:textColor="@color/colorBlack"
+            android:layout_marginTop="5dp"
+            android:textSize="20dp"
+            android:text="/him/"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/vnm"
+            android:textColor="@color/colorBlack"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="22dp"
+            android:text="anh ấy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/heart"
+        android:layout_marginRight="10dp"
+        android:padding="10dp"
+        android:layout_weight="2"
+        android:src="@drawable/icon_no_heart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
