@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="st2.group2.kyp.activity.Vowels">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_vowels"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:gravity="left|center"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:textColor="@color/colorWhite"
+                android:text="Nguyen Am Ngan /i/"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <SearchView
+                android:gravity="end|right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </SearchView>
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_margin="5dp"
+            android:src="@drawable/vowlei"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:src="@drawable/speaker_volume_loud"
+                android:layout_width="50dp"
+                android:layout_height="match_parent" />
+            <View
+                android:layout_width="20dp"
+                android:layout_height="match_parent">
+            </View>
+            <ImageView
+                android:src="@drawable/movie"
+                android:layout_width="50dp"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <TextView
+            android:layout_margin="5dp"
+            android:text="Lưỡi đưa hướng lên trên và ra phía trước khoảng cách môi trên và dưới hẹp, mở rộng miệng sang hai bên"
+            android:textSize="16dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rc_vowels"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>

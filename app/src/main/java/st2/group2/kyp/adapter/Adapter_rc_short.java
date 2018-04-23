@@ -5,6 +5,7 @@ package st2.group2.kyp.adapter;
  */
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import st2.group2.kyp.R;
+import st2.group2.kyp.activity.Vowels;
 import st2.group2.kyp.model.phonetic;
 
 public class Adapter_rc_short extends RecyclerView.Adapter<Adapter_rc_short.RecyclerViewHolder> {
@@ -38,6 +40,13 @@ public class Adapter_rc_short extends RecyclerView.Adapter<Adapter_rc_short.Recy
     public void onBindViewHolder(final Adapter_rc_short.RecyclerViewHolder holder, final int position) {
         holder.tv_spelling.setText(items.get(position).getSpelling());
         holder.img_spelling.setImageResource(items.get(position).getImg_spelling());
+        holder.tv_spelling.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context,Vowels.class);
+                context.startActivity(intent);
+            }
+        });
 
     }
 
