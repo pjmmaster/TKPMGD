@@ -55,102 +55,49 @@ public class Training extends AppCompatActivity implements TextToSpeech.OnInitLi
                 finish();
             }
         });
-
-        //check for TTS data
-        Intent checkTTSIntent = new Intent();
-        checkTTSIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
-        startActivityForResult(checkTTSIntent, MY_DATA_CHECK_CODE);
-
+        myTTS = new TextToSpeech(this, this);
         imgB_listen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String words = vnm.getText().toString();
-                speakWords(words);
+                speakOut();
             }
         });
-
-
-        //
-        //find out whether speech recognition is supported
-        PackageManager packManager = getPackageManager();
-        List<ResolveInfo> intActivities = packManager.queryIntentActivities(new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
-        if (intActivities.size() != 0) {
-            //speech recognition is supported - detect user button clicks
-            imgB_speak.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    listenToSpeech();
-                }
-            });
-        }
-        else
-        {
-            //speech recognition not supported, disable button and output message
-            imgB_speak.setEnabled(false);
-            Toast.makeText(this, "Oops - Speech recognition not supported!", Toast.LENGTH_LONG).show();
-        }
-        //
-
     }
 
-    private void listenToSpeech() {
+    @Override
+    public void onInit(int status) {
 
-        //start the speech recognition intent passing required data
-        Intent listenIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        //indicate package
-        listenIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getClass().getPackage().getName());
-        //message to display while listening
-        listenIntent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Say: " + vnm.getText().toString());
-        //set speech model
-        listenIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        //specify number of results to retrieve
-        listenIntent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 10);
+        if (status == TextToSpeech.SUCCESS) {
 
-        //start listening
-        startActivityForResult(listenIntent, VR_REQUEST);
-    }
+            int result = myTTS.setLanguage(Locale.US);
 
-    private void speakWords(String speech) {
-
-        //speak straight away
-        myTTS.speak(speech, TextToSpeech.QUEUE_FLUSH, null);
-    }
-
-    //act on result of TTS data check
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        if (requestCode == MY_DATA_CHECK_CODE) {
-            if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
-                //the user has the necessary data - create the TTS
-                myTTS = new TextToSpeech(this, this);
+            if (result == TextToSpeech.LANG_MISSING_DATA
+                    || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS", "This Language is not supported");
+            } else {
+                imgB_listen.setEnabled(true);
+                //speakOut();
             }
-            else {
-                //no data - install it now
-                Intent installTTSIntent = new Intent();
-                installTTSIntent.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
-                startActivity(installTTSIntent);
-            }
+
+        } else {
+            Log.e("TTS", "Initilization Failed!");
         }
 
-        if (requestCode == VR_REQUEST && resultCode == RESULT_OK){
-            //store the returned word list as an ArrayList
-            ArrayList<String> suggestedWords = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-            //set the retrieved list to display in the ListView using an ArrayAdapter
-            for(String match : suggestedWords)
-                Log.d("TAG",match);
-            you_speak.setText(suggestedWords.get(0).toString());
-        }
     }
-    //setup TTS
-    public void onInit(int initStatus) {
 
-        //check for successful instantiation
-        if (initStatus == TextToSpeech.SUCCESS) {
-            if(myTTS.isLanguageAvailable(Locale.US)==TextToSpeech.LANG_AVAILABLE)
-                myTTS.setLanguage(Locale.US);
+    private void speakOut() {
+
+        String text = vnm.getText().toString();
+        myTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+    }
+
+    @Override
+    public void onDestroy() {
+        // Don't forget to shutdown tts!
+        if (myTTS != null) {
+            myTTS.stop();
+            myTTS.shutdown();
         }
-        else if (initStatus == TextToSpeech.ERROR) {
-            Toast.makeText(this, "Sorry! Text To Speech failed...", Toast.LENGTH_LONG).show();
-        }
+        super.onDestroy();
     }
 }

@@ -53,11 +53,11 @@ public class MainActivity extends AppCompatActivity
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         //set default data
-        word addword1 = new word("him","/him/","anh ay","love");
-        word addword2 = new word("him1","/him1/","anh ay1","love");
-        word addword3 = new word("him2","/him2/","anh ay2","love");
-        word addword4 = new word("him3","/him3/","anh ay3","love");
-        word addword5 = new word("him4","/him4/","anh ay4","love");
+        word addword1 = new word("him","/hɪm/","Anh ay","love");
+        word addword2 = new word("hello","/hɛˈloʊ/","Xin chao","love");
+        word addword3 = new word("hate","/heɪt/","Ghet","love");
+        word addword4 = new word("happy","/ˈhæp i/","Hanh Phuc","love");
+        word addword5 = new word("hope","/hoʊp/","Mong uoc","love");
         wordList.add(addword1);
         wordList.add(addword2);
         wordList.add(addword3);
