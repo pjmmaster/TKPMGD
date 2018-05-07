@@ -26,13 +26,10 @@ public class Training extends AppCompatActivity implements TextToSpeech.OnInitLi
     private static final int VR_REQUEST = 999;
     private Toolbar toolbar_training;
     private ImageButton imgB_speak,imgB_listen;
-    private TextView vnm,you_speak;
+    private TextView en,you_speak,pronouce;
     private String TAG = "Training";
-    protected long mSpeechRecognizerStartListeningTime = 0;
-    //TTS object
     private TextToSpeech myTTS;
-    //status check code
-    private int MY_DATA_CHECK_CODE = 0;
+    private String en1,pronouce1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +39,8 @@ public class Training extends AppCompatActivity implements TextToSpeech.OnInitLi
         imgB_listen = (ImageButton) findViewById(R.id.imgB_listen);
         imgB_speak = (ImageButton) findViewById(R.id.imgB_speak);
         toolbar_training = (Toolbar) findViewById(R.id.toolbar_training);
-        vnm = (TextView) findViewById(R.id.vnm);
+        en = (TextView) findViewById(R.id.en);
+        pronouce = (TextView) findViewById(R.id.pronouce);
         you_speak = (TextView) findViewById(R.id.you_speak);
 
         //Set Back ToolBar
@@ -55,6 +53,14 @@ public class Training extends AppCompatActivity implements TextToSpeech.OnInitLi
                 finish();
             }
         });
+
+        Intent intent = getIntent();
+        String en1 = intent.getStringExtra("en");
+        String pronouce1 = intent.getStringExtra("pronouce");
+
+        en.setText(en1);
+        pronouce.setText(pronouce1);
+
         myTTS = new TextToSpeech(this, this);
         imgB_listen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +81,7 @@ public class Training extends AppCompatActivity implements TextToSpeech.OnInitLi
                     || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Log.e("TTS", "This Language is not supported");
             } else {
-                imgB_listen.setEnabled(true);
+                //imgB_listen.setEnabled(true);
                 //speakOut();
             }
 
@@ -87,7 +93,7 @@ public class Training extends AppCompatActivity implements TextToSpeech.OnInitLi
 
     private void speakOut() {
 
-        String text = vnm.getText().toString();
+        String text = en.getText().toString();
         myTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
 

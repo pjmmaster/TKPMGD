@@ -56,6 +56,8 @@ public class Adapter_rc_main extends RecyclerView.Adapter<Adapter_rc_main.Recycl
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, Training.class);
+                intent.putExtra("en",holder.en.getText().toString());
+                intent.putExtra("pronouce",holder.pronouce.getText().toString());
                 context.startActivity(intent);
             }
         });
